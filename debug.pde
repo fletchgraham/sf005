@@ -19,6 +19,8 @@ class HUD {
   Toggle toggle3;
   Toggle toggle4;
   
+  Compass compass;
+  
   HUD(float x_, float y_, float w_) {
     x = x_;
     y = y_;
@@ -36,6 +38,8 @@ class HUD {
     toggle2 = new Toggle(x + elem_w + margin, y + elem_w + margin * 2 + w, elem_w, 50);
     toggle3 = new Toggle(x + (elem_w + margin)*2, y + elem_w + margin * 2 + w, elem_w, 50);
     toggle4 = new Toggle(x + (elem_w + margin)*3, y + elem_w + margin * 2 + w, elem_w, 50);
+    
+    compass = new Compass(x, y + elem_w*2 + margin*3 + w, w, w);
   }
   
   void render() {
@@ -49,5 +53,7 @@ class HUD {
     toggle2.render(data.toggle2);
     toggle3.render(data.toggle3);
     toggle4.render(data.toggle4);
+    
+    compass.render();
   }
 }

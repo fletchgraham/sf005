@@ -14,7 +14,7 @@ HUD hud;
 public void setup() {
   //fullScreen(P3D); // turn this off for debug probs.
   frameRate(24);
-  size(1200,900,P3D);
+  size(1920,1080,P3D);
   pixelDensity(displayDensity());
   data = new Data(); // where all the data is kept and updated.
   mans = loadShape("rocket.obj"); // load obj into mans.
@@ -36,7 +36,7 @@ void oscEvent(OscMessage theOscMessage) {
 public void draw() {
   pushMatrix(); // add default coords to stack.
   background(data.fader5 * 255); // black background.
-  translate(width/2, height/2 + 100, 400); // bring mans to center stage.
+  translate(width/2, height/2 + 100, 600); // bring mans to center stage.
   rotateY(data.phoneX-PI/2); // around the up and down axis.
   rotateX(PI); // stand him upright.
   

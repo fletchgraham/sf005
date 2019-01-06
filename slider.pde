@@ -56,3 +56,19 @@ class Toggle extends Element {
     }
   }
 }
+
+class Compass extends Element {
+  
+  Compass(float x_, float y_, float w_, float h_) {
+    super(x_, y_, w_, h_);
+  }
+  
+  void render() {
+    stroke(255);
+    strokeWeight(2);
+    noFill();
+    ellipseMode(CORNERS);
+    ellipse(x, y, x + w, y + h);
+    }
+  }
+  
