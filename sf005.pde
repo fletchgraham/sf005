@@ -2,46 +2,44 @@ import oscP5.*;
 import netP5.*;
 
 PShape mans; // the 3d model of mans.
-float ry; // for ambient spin.
 Friend friend; // the way to draw mans in an interesting way.
+Data data;
 
 OscP5 oscP5;
 NetAddress myRemoteLocation;
   
 public void setup() {
-  //fullScreen(P3D);
-  size(800,900,P3D);
+  //fullScreen(P3D); // turn this off for debug probs.
+  frameRate(24);
+  size(1200,900,P3D);
   pixelDensity(displayDensity());
+  data = new Data(); // where all the data is kept and updated.
   mans = loadShape("rocket.obj"); // load obj into mans.
-  friend = new Friend(mans); // load mans into friend.
+  friend = new Friend(mans); // load mans into friend renderer.
+  
   
   // osc stuff:
   oscP5 = new OscP5(this,8000);
   myRemoteLocation = new NetAddress("127.0.0.1",8000);
 }
 
-// rotations for mans:
-float x = 0.0;
-float y = 0.0;
-float z = 0.0;
-
 void oscEvent(OscMessage theOscMessage) {
-  
-  x = theOscMessage.get(0).floatValue() * PI;
-  y = theOscMessage.get(1).floatValue() * PI;  
-  z = theOscMessage.get(2).floatValue() * PI; 
-  
-  return;
-  
+  data.handle(theOscMessage);
+  return; 
 }
 
 public void draw() {
-  background(0);
-  
+  pushMatrix();
+  background(0); // black background.
   translate(width/2, height/2 + 100, 400); // bring mans to center stage.
-  rotateY(x/2-PI/2+ry); // ambient spin.
-  rotateX(PI);
+  rotateY(data.phoneX/2-PI/2); // around the up and down axis.
+  rotateX(PI); // stand him upright.
+  
   friend.render(); // draw mans as a friend.
   
-  //ry += 0.005; // increase ambient rotation for next draw.
+  popMatrix(); // back to normal coordinates.
+  
+  //ui placeholder:
+  strokeWeight(2);
+  rect(10, 10, .3 * width, height-20);
 }
