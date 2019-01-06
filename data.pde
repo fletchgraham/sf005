@@ -9,7 +9,11 @@ class Data {
   float fader3 = 0.0;
   float fader4 = 0.0;
   float fader5 = 0.0;
-
+  float toggle1 = 0.0;
+  float toggle2 = 0.0;
+  float toggle3 = 0.0;
+  float toggle4 = 0.0;
+  
   void handle(OscMessage last_osc) {
     last_osc.print();
     String pat = last_osc.addrPattern();
@@ -27,6 +31,14 @@ class Data {
       fader4 = last_osc.get(0).floatValue();
     } else if (pat.contains("fader5")) {
       fader5 = last_osc.get(0).floatValue();
+    } else if (pat.contains("toggle1")) {
+      toggle1 = last_osc.get(0).floatValue();
+    } else if (pat.contains("toggle2")) {
+      toggle2 = last_osc.get(0).floatValue();
+    } else if (pat.contains("toggle3")) {
+      toggle3 = last_osc.get(0).floatValue();
+    } else if (pat.contains("toggle4")) {
+      toggle4 = last_osc.get(0).floatValue();
     }
   }
 }
