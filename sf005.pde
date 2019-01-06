@@ -30,7 +30,7 @@ void oscEvent(OscMessage theOscMessage) {
 
 public void draw() {
   pushMatrix();
-  background(0); // black background.
+  background(data.fader5 * 255); // black background.
   translate(width/2, height/2 + 100, 400); // bring mans to center stage.
   rotateY(data.phoneX/2-PI/2); // around the up and down axis.
   rotateX(PI); // stand him upright.

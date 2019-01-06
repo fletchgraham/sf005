@@ -40,7 +40,7 @@ class Friend {
     
     beginShape(POINTS);
     for (PVector point : points) {
-      strokeWeight(9);
+      strokeWeight(data.fader1 * 10);
       vertex(point.x, point.y, point.z);
     }
     endShape();
