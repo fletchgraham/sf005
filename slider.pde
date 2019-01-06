@@ -69,6 +69,16 @@ class Compass extends Element {
     noFill();
     ellipseMode(CORNERS);
     ellipse(x, y, x + w, y + h);
+    
+    ortho(-width/2, width/2, -height/2, height/2);
+    pushMatrix();
+    translate(w/2+14, height/2+10);
+    rotateY(data.phoneX);
+    rotateX(data.phoneZ);
+    rotateZ(data.phoneY);
+    box(w/2, w/2, w/2);
+    popMatrix();
+    perspective();
     }
   }
   
