@@ -7,6 +7,9 @@ Data data;
 
 OscP5 oscP5;
 NetAddress myRemoteLocation;
+
+// UI initialization:
+HUD hud;
   
 public void setup() {
   //fullScreen(P3D); // turn this off for debug probs.
@@ -17,6 +20,8 @@ public void setup() {
   mans = loadShape("rocket.obj"); // load obj into mans.
   friend = new Friend(mans); // load mans into friend renderer.
   
+  // setup UI:
+  hud = new HUD(16, 16, 256);
   
   // osc stuff:
   oscP5 = new OscP5(this,8000);
@@ -29,17 +34,16 @@ void oscEvent(OscMessage theOscMessage) {
 }
 
 public void draw() {
-  pushMatrix();
+  pushMatrix(); // add default coords to stack.
   background(data.fader5 * 255); // black background.
   translate(width/2, height/2 + 100, 400); // bring mans to center stage.
-  rotateY(data.phoneX/2-PI/2); // around the up and down axis.
+  rotateY(data.phoneX-PI/2); // around the up and down axis.
   rotateX(PI); // stand him upright.
   
   friend.render(); // draw mans as a friend.
   
   popMatrix(); // back to normal coordinates.
   
-  //ui placeholder:
-  strokeWeight(2);
-  rect(10, 10, .3 * width, height-20);
+  // draw UI elements:
+  hud.render();
 }
