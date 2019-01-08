@@ -1,18 +1,13 @@
 // the ui overlay.
 
 class HUD {
+  Slider[] sliders = new Slider[5];
   float x;
   float y;
   float w;
   float margin = 16;
   float elem_w;
   // no height because elements are fixed height.
-  
-  Slider slider5;
-  Slider slider1;
-  Slider slider2;
-  Slider slider3;
-  Slider slider4;
   
   Toggle toggle1;
   Toggle toggle2;
@@ -27,12 +22,11 @@ class HUD {
     w = w_;
     elem_w = (w - 3 * margin) / 4;
     
-    slider5 = new Slider(x, y, w, elem_w);
-    slider5.set_orientation("horizontal");
-    slider1 = new Slider(x, y + elem_w + margin, elem_w, w);
-    slider2 = new Slider(x + elem_w + margin, y + elem_w + margin, elem_w, w);
-    slider3 = new Slider(x + (elem_w + margin) * 2, y + elem_w + margin, elem_w, w);
-    slider4 = new Slider(x + (elem_w + margin) * 3, y + elem_w + margin, elem_w, w);
+    for (int i=0; i<4; i++) {  
+      sliders[i] = new Slider(x + (elem_w + margin) * i, y + elem_w + margin, elem_w, w);
+    }
+    sliders[4] = new Slider(x, y, w, elem_w);
+    sliders[4].set_orientation("horizontal");
     
     toggle1 = new Toggle(x, y + elem_w + margin * 2 + w, elem_w, 50);
     toggle2 = new Toggle(x + elem_w + margin, y + elem_w + margin * 2 + w, elem_w, 50);
@@ -43,11 +37,9 @@ class HUD {
   }
   
   void render() {
-    slider5.render(data.fader[4]);
-    slider1.render(data.fader[0]);
-    slider2.render(data.fader[1]);
-    slider3.render(data.fader[2]);
-    slider4.render(data.fader[3]);
+    for (int i=0; i<5; i++) {  
+      sliders[i].render(data.fader[i]);
+    }
     
     toggle1.render(data.toggle[0]);
     toggle2.render(data.toggle[1]);
