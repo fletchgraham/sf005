@@ -16,7 +16,7 @@ class Friend {
       PShape child = my_shape.getChild(i);
       for (int j=0; j<child.getVertexCount(); j++) {
         PVector vert = child.getVertex(j);
-        PVector transform = new PVector(0, noise(data.phoneX+i)*50, 0);
+        PVector transform = new PVector(0, noise(data.acc[0]+i)*50, 0);
         vert = vert.add(transform);
         points.add(vert);
       }
@@ -27,7 +27,7 @@ class Friend {
     update_points();
 
     // wireframe:
-    if (data.toggle1 == 1.0) {
+    if (data.toggle[0] == 1.0) {
       noFill();
       stroke(255);
       strokeWeight(2);
@@ -45,7 +45,7 @@ class Friend {
     // floaty points:
     beginShape(POINTS);
     for (PVector point : points) {
-      strokeWeight(data.fader1 * 10);
+      strokeWeight(data.fader[0] * 10);
       vertex(point.x, point.y, point.z);
     }
     endShape();

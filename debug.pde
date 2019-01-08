@@ -43,16 +43,16 @@ class HUD {
   }
   
   void render() {
-    slider5.render(data.fader5);
-    slider1.render(data.fader1);
-    slider2.render(data.fader2);
-    slider3.render(data.fader3);
-    slider4.render(data.fader4);
+    slider5.render(data.fader[4]);
+    slider1.render(data.fader[0]);
+    slider2.render(data.fader[1]);
+    slider3.render(data.fader[2]);
+    slider4.render(data.fader[3]);
     
-    toggle1.render(data.toggle1);
-    toggle2.render(data.toggle2);
-    toggle3.render(data.toggle3);
-    toggle4.render(data.toggle4);
+    toggle1.render(data.toggle[0]);
+    toggle2.render(data.toggle[1]);
+    toggle3.render(data.toggle[2]);
+    toggle4.render(data.toggle[3]);
     
     compass.render();
   }

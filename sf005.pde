@@ -35,9 +35,9 @@ void oscEvent(OscMessage theOscMessage) {
 
 public void draw() {
   pushMatrix(); // add default coords to stack.
-  background(data.fader5 * 255); // black background.
+  background(data.fader[4] * 255); // black background.
   translate(width/2, height/2 + 100, 600); // bring mans to center stage.
-  rotateY(data.phoneX-PI/2); // around the up and down axis.
+  rotateY(data.acc[0]-PI/2); // around the up and down axis.
   rotateX(PI); // stand him upright.
   
   friend.render(); // draw mans as a friend.
@@ -46,4 +46,10 @@ public void draw() {
   
   // draw UI elements:
   hud.render();
+}
+
+void mouseClicked() {
+  if (hud.toggle1.over() != null) {
+    data.toggle[0] = 1.0;
+  }
 }

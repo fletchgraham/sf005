@@ -12,6 +12,17 @@ class Element {
     w = w_;
     h = h_;
   }
+  
+  PVector over() {
+    if (mouseX > x && mouseX < x + w && mouseY > y && mouseY < y + h) {
+      float x_percent = (mouseX - x)/ w;
+      float y_percent = (mouseY - y)/ h;
+      PVector coords_relative = new PVector(x_percent, y_percent);
+      return coords_relative;
+    } else {
+      return null;
+    }
+  }
 }
 
 class Slider extends Element {
@@ -73,9 +84,9 @@ class Compass extends Element {
     ortho(-width/2, width/2, -height/2, height/2);
     pushMatrix();
     translate(w/2+14, height/2+10);
-    rotateY(data.phoneX);
-    rotateX(data.phoneZ);
-    rotateZ(data.phoneY);
+    rotateY(data.acc[0]);
+    rotateX(data.acc[1]);
+    rotateZ(data.acc[2]);
     box(w/2, w/2, w/2);
     popMatrix();
     perspective();
