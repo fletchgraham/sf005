@@ -49,7 +49,7 @@ public void draw() {
 }
 
 void mouseClicked() {
-  if (hud.toggle1.over() != null) {
+  if (hud.toggles[0].over() != null) {
     data.toggle[0] = 1.0;
   }
 }
