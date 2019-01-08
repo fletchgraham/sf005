@@ -35,7 +35,7 @@ void oscEvent(OscMessage theOscMessage) {
 
 public void draw() {
   pushMatrix(); // add default coords to stack.
-  background(data.fader[4] * 255); // black background.
+  background(data.faders[4] * 255); // black background.
   translate(width/2, height/2 + 100, 600); // bring mans to center stage.
   rotateY(data.acc[0]-PI/2); // around the up and down axis.
   rotateX(PI); // stand him upright.
@@ -50,6 +50,6 @@ public void draw() {
 
 void mouseClicked() {
   if (hud.toggles[0].over() != null) {
-    data.toggle[0] = 1.0;
+    data.toggles[0] = 1.0;
   }
 }

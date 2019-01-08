@@ -27,7 +27,7 @@ class Friend {
     update_points();
 
     // wireframe:
-    if (data.toggle[0] == 1.0) {
+    if (data.toggles[0] == 1.0) {
       noFill();
       stroke(255);
       strokeWeight(2);
@@ -45,7 +45,7 @@ class Friend {
     // floaty points:
     beginShape(POINTS);
     for (PVector point : points) {
-      strokeWeight(data.fader[0] * 10);
+      strokeWeight(data.faders[0] * 10);
       vertex(point.x, point.y, point.z);
     }
     endShape();

@@ -41,10 +41,10 @@ class HUD {
   void render() {
     // render all of the elements:
     for (int i=0; i<5; i++) {  
-      sliders[i].render(data.fader[i]);
+      sliders[i].render(data.faders[i]);
     }  
     for (int i=0; i<4; i++) {  
-      toggles[i].render(data.toggle[i]);
+      toggles[i].render(data.toggles[i]);
     }
     compass.render();
   }
