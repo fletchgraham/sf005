@@ -65,6 +65,16 @@ class Toggle extends Element {
   Toggle(float x_, float y_, float w_, float h_) {
     super(x_, y_, w_, h_);
   }
+  
+  void clicked(Data data_model, int index) {
+    if (over() != null) {
+      if (data_model.toggles[index] == 0.0) {
+        data_model.toggles[index] = 1.0;
+      } else {
+        data_model.toggles[index] = 0.0;
+      }
+    }
+  }
 
   void render(float value) {
     stroke(255);

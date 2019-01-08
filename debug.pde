@@ -38,12 +38,17 @@ class HUD {
     compass = new Compass(x, y + elem_w*2 + margin*3 + w, w, w);
   }
   
-  void clicked(Data data_model) {
+  void pressed(Data data_model) {
     for (int i=0; i<5; i++) {
       sliders[i].clicked(data_model, i);
     }
   }
   
+  void clicked(Data data_model) {
+    for (int i=0; i<4; i++) {
+      toggles[i].clicked(data_model, i);
+    }
+  }
   void render() {
     // render all of the elements:
     for (int i=0; i<5; i++) {  

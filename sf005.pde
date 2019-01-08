@@ -3,13 +3,12 @@ import netP5.*;
 
 PShape mans; // the 3d model of mans.
 Friend friend; // the way to draw mans in an interesting way.
-Data data;
+Data data; // data manager.
 
 OscP5 oscP5;
 NetAddress myRemoteLocation;
 
-// UI initialization:
-HUD hud;
+HUD hud; // UI overlay thing
   
 public void setup() {
   //fullScreen(P3D); // turn this off for debug probs.
@@ -20,8 +19,7 @@ public void setup() {
   mans = loadShape("rocket.obj"); // load obj into mans.
   friend = new Friend(mans); // load mans into friend renderer.
   
-  // setup UI:
-  hud = new HUD(16, 16, 256);
+  hud = new HUD(16, 16, 256); // position and width of the hud.
   
   // osc stuff:
   oscP5 = new OscP5(this,8000);
@@ -34,10 +32,11 @@ void oscEvent(OscMessage theOscMessage) {
 }
 
 public void draw() {
-  // check for user input happening:
+  // check for continuous user input happening:
   if (mousePressed == true) {
-    hud.clicked(data);
+    hud.pressed(data);
   }
+  
   pushMatrix(); // add default coords to stack.
   background(data.faders[4] * 255); // black background.
   translate(width/2, height/2 + 100, 600); // bring mans to center stage.
@@ -47,7 +46,10 @@ public void draw() {
   friend.render(); // draw mans as a friend.
   
   popMatrix(); // back to normal coordinates.
-  
-  // draw UI elements:
-  hud.render();
+  hud.render(); // draw UI elements:
+}
+
+void mouseClicked() {
+  // click event as distinct from pressed:
+  hud.clicked(data);
 }
