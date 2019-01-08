@@ -89,10 +89,29 @@ class Toggle extends Element {
 }
 
 class Compass extends Element {
+  float ax = 0.0;
+  float ay = 0.0;
+  float aax = 0.0;
+  float aay = 0.0;
 
   Compass(float x_, float y_, float w_, float h_) {
     super(x_, y_, w_, h_);
   }
+  
+  void pressed(Data data_model) {
+    aax = data_model.acc[0];
+    aay = data_model.acc[1];
+    ax = mouseX;
+    ay = mouseY;
+  }
+  
+  void dragging(Data data_model) {
+    float dx = mouseX - ax;
+    float dy = mouseY - ay;
+    data_model.acc[0] = aax + dx / 100;
+    data_model.acc[1] = aay + dy / 100;
+  } 
+    
 
   void render() {
     stroke(255);

@@ -42,12 +42,14 @@ class HUD {
     for (int i=0; i<5; i++) {
       sliders[i].clicked(data_model, i);
     }
+    compass.dragging(data_model);
   }
   
   void clicked(Data data_model) {
     for (int i=0; i<4; i++) {
       toggles[i].clicked(data_model, i);
     }
+    compass.pressed(data_model);
   }
   void render() {
     // render all of the elements:

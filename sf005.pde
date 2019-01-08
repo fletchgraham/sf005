@@ -49,7 +49,7 @@ public void draw() {
   hud.render(); // draw UI elements:
 }
 
-void mouseClicked() {
+void mousePressed() {
   // click event as distinct from pressed:
   hud.clicked(data);
 }
