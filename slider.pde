@@ -5,14 +5,14 @@ class Element {
   float y = 0.0;
   float w = 100.0;
   float h = 24.0;
-  
+
   Element(float x_, float y_, float w_, float h_) {
     x = x_;
     y = y_;
     w = w_;
     h = h_;
   }
-  
+
   PVector over() {
     if (mouseX > x && mouseX < x + w && mouseY > y && mouseY < y + h) {
       float x_percent = (mouseX - x)/ w;
@@ -27,20 +27,30 @@ class Element {
 
 class Slider extends Element {
   String orientation = "vertical";
-  
+
   void set_orientation(String orientation_) {
     orientation = orientation_;
   }
-  
+
   Slider(float x_, float y_, float w_, float h_) {
     super(x_, y_, w_, h_);
   }
-  
+
+  void clicked(Data data_model, int index) {
+    if (over() != null) {
+      if (orientation.equals("horizontal")) {
+        data_model.faders[index] = over().x;
+      } else {
+        data_model.faders[index] = 1 - over().y; // inverted bc bottom is zero.
+      }
+    }
+  }
+
   void render(float percent) {
     stroke(255);
     strokeWeight(2);
     noFill();
-    rect(x, y, w, h,5);
+    rect(x, y, w, h, 5);
     fill(255);
     if (orientation.equals("horizontal")) {
       rect(x + (w-10) * percent, y, 10, h, 5);
@@ -51,11 +61,11 @@ class Slider extends Element {
 }
 
 class Toggle extends Element {
-  
+
   Toggle(float x_, float y_, float w_, float h_) {
     super(x_, y_, w_, h_);
   }
-  
+
   void render(float value) {
     stroke(255);
     strokeWeight(2);
@@ -69,18 +79,18 @@ class Toggle extends Element {
 }
 
 class Compass extends Element {
-  
+
   Compass(float x_, float y_, float w_, float h_) {
     super(x_, y_, w_, h_);
   }
-  
+
   void render() {
     stroke(255);
     strokeWeight(2);
     noFill();
     ellipseMode(CORNERS);
     ellipse(x, y, x + w, y + h);
-    
+
     ortho(-width/2, width/2, -height/2, height/2);
     pushMatrix();
     translate(w/2+14, height/2+10);
@@ -90,6 +100,5 @@ class Compass extends Element {
     box(w/2, w/2, w/2);
     popMatrix();
     perspective();
-    }
   }
-  
+}

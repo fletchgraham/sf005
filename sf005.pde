@@ -34,6 +34,10 @@ void oscEvent(OscMessage theOscMessage) {
 }
 
 public void draw() {
+  // check for user input happening:
+  if (mousePressed == true) {
+    hud.clicked(data);
+  }
   pushMatrix(); // add default coords to stack.
   background(data.faders[4] * 255); // black background.
   translate(width/2, height/2 + 100, 600); // bring mans to center stage.
@@ -46,10 +50,4 @@ public void draw() {
   
   // draw UI elements:
   hud.render();
-}
-
-void mouseClicked() {
-  if (hud.toggles[0].over() != null) {
-    data.toggles[0] = 1.0;
-  }
 }
