@@ -9,9 +9,12 @@ OscP5 oscP5;
 NetAddress myRemoteLocation;
 
 HUD hud; // UI overlay thing
+
+float time;
   
 public void setup() {
   //fullScreen(P3D); // turn this off for debug probs.
+  time = 0;
   frameRate(24);
   size(1920,1080,P3D);
   pixelDensity(displayDensity());
@@ -38,7 +41,7 @@ public void draw() {
   }
   
   pushMatrix(); // add default coords to stack.
-  background(data.faders[4] * 255); // black background.
+  background(0); // black background.
   translate(width/2, height/2 + 100, 600); // bring mans to center stage.
   rotateY(data.acc[0]-PI/2); // around the up and down axis.
   rotateX(PI); // stand him upright.
@@ -47,6 +50,7 @@ public void draw() {
   
   popMatrix(); // back to normal coordinates.
   hud.render(); // draw UI elements:
+  time += data.faders[4];
 }
 
 void mousePressed() {

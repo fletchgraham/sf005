@@ -16,7 +16,7 @@ class Friend {
       PShape child = my_shape.getChild(i);
       for (int j=0; j<child.getVertexCount(); j++) {
         PVector vert = child.getVertex(j);
-        PVector transform = new PVector(0, noise(data.acc[0]+i)*50, 0);
+        PVector transform = new PVector(sin((time/4 + vert.y)/4)*4, noise(time+i)*50, 0);
         vert = vert.add(transform);
         points.add(vert);
       }
