@@ -116,8 +116,8 @@ class Compass extends Element {
     if (editing) {
       float dx = mouseX - ax;
       float dy = mouseY - ay;
-      data_model.acc[0] = aax + dx / 100;
-      data_model.acc[1] = aay + dy / 100;
+      data_model.acc[0] = aax + dx / 500;
+      data_model.acc[1] = aay - dy / 500;
     }
   } 
     
@@ -132,9 +132,8 @@ class Compass extends Element {
     ortho(-width/2, width/2, -height/2, height/2);
     pushMatrix();
     translate(w/2+14, height/2+10);
-    rotateY(data.acc[0]);
-    rotateX(data.acc[1]);
-    rotateZ(data.acc[2]);
+    rotateY(data.pitch);
+    rotateX(data.roll);
     box(w/2, w/2, w/2);
     popMatrix();
     perspective();
