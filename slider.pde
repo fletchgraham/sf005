@@ -98,7 +98,14 @@ class Compass extends Element {
     super(x_, y_, w_, h_);
   }
   
+  boolean editing = false;
+  
   void pressed(Data data_model) {
+    if (over() != null) {
+      editing = true;
+    } else {
+      editing = false;
+    }
     aax = data_model.acc[0];
     aay = data_model.acc[1];
     ax = mouseX;
@@ -106,10 +113,12 @@ class Compass extends Element {
   }
   
   void dragging(Data data_model) {
-    float dx = mouseX - ax;
-    float dy = mouseY - ay;
-    data_model.acc[0] = aax + dx / 100;
-    data_model.acc[1] = aay + dy / 100;
+    if (editing) {
+      float dx = mouseX - ax;
+      float dy = mouseY - ay;
+      data_model.acc[0] = aax + dx / 100;
+      data_model.acc[1] = aay + dy / 100;
+    }
   } 
     
 

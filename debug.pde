@@ -46,6 +46,7 @@ class HUD {
   }
   
   void clicked(Data data_model) {
+    
     for (int i=0; i<4; i++) {
       toggles[i].clicked(data_model, i);
     }
