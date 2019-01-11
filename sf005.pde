@@ -4,6 +4,7 @@ import netP5.*;
 PShape mans; // the 3d model of mans.
 Friend friend; // the way to draw mans in an interesting way.
 Data data; // data manager.
+AutoPilot auto;
 
 OscP5 oscP5;
 NetAddress myRemoteLocation;
@@ -31,6 +32,8 @@ public void setup() {
   // osc stuff:
   oscP5 = new OscP5(this,8000);
   myRemoteLocation = new NetAddress("127.0.0.1",8000);
+  
+  auto = new AutoPilot();
 }
 
 void oscEvent(OscMessage theOscMessage) {
@@ -44,11 +47,24 @@ public void draw() {
   
   // check for continuous user input happening:
   if (mousePressed == true) {
+    data.idle_timer = 0;
     hud.pressed(data);
   }
   
   pushMatrix(); // add default coords to stack.
-  background(0); // black background.
+  
+  // idle_timer test:
+  if (data.idle_timer > 24*5) {
+    strokeWeight(2);
+    stroke(255);
+    noFill();
+    ellipse(16, height-16, 20, 20);
+    auto.advance_fader();
+  } else {
+    background(0);
+  }
+    
+  background(0);
   translate(width/2 + horiz, height/1.9 + vert, height/1.4 * scale); // bring mans to center stage.
   rotateY(data.pitch); // around the up and down axis.
   rotateX(PI + data.roll);
@@ -60,11 +76,13 @@ public void draw() {
   popMatrix(); // back to normal coordinates.
   hud.render(); // draw UI elements:
   time += data.faders[4]/48;
+  data.idle_timer += 1;
 }
 
 void mousePressed() {
   // click event as distinct from pressed:
   hud.clicked(data);
+  data.idle_timer = 0;
 }
 
 void keyPressed() {

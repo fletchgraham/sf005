@@ -10,6 +10,8 @@ class Data {
   float[] roll_history = new float[dampening];
   float[] pitch_history = new float[dampening];
   
+  int idle_timer = 0;
+  
   Data() {
     acc[0] = -.01;
     acc[1] = -.01;   
@@ -44,6 +46,7 @@ class Data {
   }
 
   void handle(OscMessage last_osc) {
+    idle_timer = 0;
     last_osc.print();
     String pat = last_osc.addrPattern();
     if (pat.equals("/accxyz")) {
