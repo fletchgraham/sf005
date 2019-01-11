@@ -19,7 +19,7 @@ public void setup() {
   size(1920,1080,P3D);
   pixelDensity(displayDensity());
   data = new Data(); // where all the data is kept and updated.
-  mans = loadShape("rocket.obj"); // load obj into mans.
+  mans = loadShape("perturbed_man_sf.obj"); // load obj into mans.
   friend = new Friend(mans); // load mans into friend renderer.
   
   hud = new HUD(16, 16, 256); // position and width of the hud.
@@ -47,7 +47,7 @@ public void draw() {
   background(0); // black background.
   translate(width/2, height/2 + 100, 600); // bring mans to center stage.
   rotateY(data.pitch); // around the up and down axis.
-  rotateX(PI + data.roll); // stand him upright.
+  rotateX(PI + data.roll);
   
   // render in different styles:
   friend.render1();
