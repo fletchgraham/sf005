@@ -57,7 +57,7 @@ public void draw() {
   
   popMatrix(); // back to normal coordinates.
   hud.render(); // draw UI elements:
-  time += data.faders[4];
+  time += data.faders[4]/24;
 }
 
 void mousePressed() {

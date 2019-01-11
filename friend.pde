@@ -25,21 +25,21 @@ class Friend {
         && points.get(i).y == points.get(j).y 
         && points.get(i).z == points.get(j).z) {
           
+          try {
           collapsed.remove(i);
+          } catch(Exception e){}
           
         }
       }
     }
   }
-
+  
   void update_points() {
     points.clear();
     for (int i=0; i<my_shape.getChildCount(); i++) {
       PShape child = my_shape.getChild(i);
       for (int j=0; j<child.getVertexCount(); j++) {
         PVector vert = child.getVertex(j);
-        PVector transform = new PVector(sin((time/4 + vert.y)/4)*4, noise(time+i)*50, 0);
-        vert = vert.add(transform);
         points.add(vert);
       }
     }
@@ -65,27 +65,31 @@ class Friend {
 
   void render2() {
     update_points(); // REMOVE THIS SOMEHOW.
-    
+    //PVector transform = new PVector(sin((time/4 + vert.y)/4)*4, noise(time+i)*50, 0); // the transform for floaty balls.
     // floaty points:
     beginShape(POINTS);
     for (PVector point : points) {
       strokeWeight(data.faders[1] * 10);
-      vertex(point.x, point.y, point.z);
+      vertex(displace(point.x), displace(point.y), displace(point.z));
     }
     endShape();
   }
   
   void render3(){
-    println(collapsed.size());
     noFill();
     beginShape();
     for (PVector point : collapsed) {
-      strokeWeight(2);
-      vertex(point.x, point.y, point.z);
+      strokeWeight(data.faders[0]*2);
+      vertex(displace(point.x), displace(point.y), displace(point.z));
     }
     endShape(CLOSE);
   }
   
   void render4(){}
   
+}
+
+
+float displace(float value) {
+  return value + noise(value+time)*100-50;
 }
