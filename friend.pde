@@ -8,11 +8,28 @@ class Friend {
   Friend(PShape my_shape_) {
     my_shape = my_shape_; // the base. what we're working with
     points = new ArrayList(); // all the points from the shape. including overlapping.
+    collapsed = new ArrayList();
     update_points(); // load the points into the list.
     remove_doubles();
   }
   
   void remove_doubles() {
+    collapsed.clear();
+    for (PVector point : points) {
+      collapsed.add(point);
+    }
+    for (int i = 0; i < points.size(); i++) {
+      for (int j = 0; j < points.size(); j++) {
+        if (i != j && 
+        points.get(i).x == points.get(j).x 
+        && points.get(i).y == points.get(j).y 
+        && points.get(i).z == points.get(j).z) {
+          
+          collapsed.remove(i);
+          
+        }
+      }
+    }
   }
 
   void update_points() {
@@ -58,7 +75,17 @@ class Friend {
     endShape();
   }
   
-  void render3(){};
-  void render4(){};
+  void render3(){
+    println(collapsed.size());
+    noFill();
+    beginShape();
+    for (PVector point : collapsed) {
+      strokeWeight(2);
+      vertex(point.x, point.y, point.z);
+    }
+    endShape(CLOSE);
+  }
+  
+  void render4(){}
   
 }

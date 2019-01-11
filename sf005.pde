@@ -45,7 +45,7 @@ public void draw() {
   
   pushMatrix(); // add default coords to stack.
   background(0); // black background.
-  translate(width/2, height/2 + 100, 600); // bring mans to center stage.
+  translate(width/2, height/2 + height/13, 600); // bring mans to center stage.
   rotateY(data.pitch); // around the up and down axis.
   rotateX(PI + data.roll);
   
