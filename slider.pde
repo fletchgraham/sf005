@@ -43,7 +43,7 @@ class Slider extends Element {
       } else {
         data_model.faders[index] = (1 - over().y); // inverted bc bottom is zero.
       }
-      if (data_model.faders[index] < .008) {
+      if (data_model.faders[index] < .01) {
         data_model.faders[index] = 0;
       }
     }

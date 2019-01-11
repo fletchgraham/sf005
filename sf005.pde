@@ -54,14 +54,12 @@ public void draw() {
   rotateX(PI + data.roll);
   
   // render in different styles:
-  friend.render1();
-  friend.render2();
-  friend.render3();
-  friend.render4();
+  friend.render_wire();
+  friend.render_points();
   
   popMatrix(); // back to normal coordinates.
   hud.render(); // draw UI elements:
-  time += data.faders[4]/24;
+  time += data.faders[4]/48;
 }
 
 void mousePressed() {

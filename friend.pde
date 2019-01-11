@@ -12,7 +12,7 @@ class Friend {
     update_points(); // load the points into the list.
     remove_doubles();
   }
-  
+
   void remove_doubles() {
     collapsed.clear();
     for (PVector point : points) {
@@ -21,19 +21,20 @@ class Friend {
     for (int i = 0; i < points.size(); i++) {
       for (int j = 0; j < points.size(); j++) {
         if (i != j && 
-        points.get(i).x == points.get(j).x 
-        && points.get(i).y == points.get(j).y 
-        && points.get(i).z == points.get(j).z) {
-          
+          points.get(i).x == points.get(j).x 
+          && points.get(i).y == points.get(j).y 
+          && points.get(i).z == points.get(j).z) {
+
           try {
-          collapsed.remove(i);
-          } catch(Exception e){}
-          
+            collapsed.remove(i);
+          } 
+          catch(Exception e) {
+          }
         }
       }
     }
   }
-  
+
   void update_points() {
     points.clear();
     for (int i=0; i<my_shape.getChildCount(); i++) {
@@ -44,8 +45,8 @@ class Friend {
       }
     }
   }
-  
-  void render1() {
+
+  void render_wire() {
     // wireframe:
     if (data.toggles[0] == 1.0) {
       noFill();
@@ -60,46 +61,42 @@ class Friend {
         }
       }
       endShape();
+    } else {
+      noFill();
+      beginShape();
+      for (PVector point : collapsed) {
+        strokeWeight(data.faders[0]*2);
+        vertex(displace(point.x), displace(point.y), displace(point.z));
+      }
+      endShape(CLOSE);
     }
   }
 
-  void render2() {
-    // floaty points:
-    beginShape(POINTS);
-    for (PVector point : points) {
-      if (data.toggles[1] == 0.0) {
-        strokeWeight(data.faders[1] * 10);
-      } else {
-        strokeWeight((1-data.faders[1]) * 10);
+  void render_points() {
+    if (data.toggles[1] == 0) {
+      // floaty points:
+      beginShape(POINTS);
+      for (PVector point : points) {
+        strokeWeight(data.faders[1] * 16);
+        vertex(displace(point.x), displace(point.y), displace(point.z));
       }
-      vertex(displace(point.x), displace(point.y), displace(point.z));
-    }
-    endShape();
-  }
-  
-  void render3(){
-    noFill();
-    beginShape();
-    for (PVector point : collapsed) {
-      strokeWeight(data.faders[0]*2);
-      vertex(displace(point.x), displace(point.y), displace(point.z));
-    }
-    endShape(CLOSE);
-  }
-  
-  void render4(){
-    strokeWeight(2);
-    for (PVector point : collapsed) {
-      pushMatrix();
-      translate(displace(point.x), displace(point.y), displace(point.z));
-      rotateY(time*10);
-      box(10, 10, 10);
-      popMatrix();
+      endShape();
+    } else {
+      // cubes:
+      strokeWeight(2);
+      fill(0);
+      for (PVector point : collapsed) {
+        pushMatrix();
+        translate(displace(point.x), displace(point.y), displace(point.z));
+        rotateY(time*10);
+        box(data.faders[1]*24, data.faders[1]*24, data.faders[1]*24);
+        popMatrix();
+      }
     }
   }
 }
 
 
 float displace(float value) {
-  return value + noise(value+time)*100-50;
+  return value + (noise(value+time)-.5)*(data.faders[2]-.5)*500;
 }
