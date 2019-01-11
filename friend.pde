@@ -64,8 +64,6 @@ class Friend {
   }
 
   void render2() {
-    update_points(); // REMOVE THIS SOMEHOW.
-    //PVector transform = new PVector(sin((time/4 + vert.y)/4)*4, noise(time+i)*50, 0); // the transform for floaty balls.
     // floaty points:
     beginShape(POINTS);
     for (PVector point : points) {

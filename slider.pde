@@ -122,7 +122,7 @@ class Compass extends Element {
   } 
     
 
-  void render() {
+  void render(float elem_w, float margin) {
     stroke(255);
     strokeWeight(2);
     fill(0);
@@ -131,7 +131,7 @@ class Compass extends Element {
 
     ortho(-width/2, width/2, -height/2, height/2);
     pushMatrix();
-    translate(w/2+14, height/2+10);
+    translate(w/2+15, 2*elem_w+3*margin+1.5*w+14);
     rotateY(data.pitch);
     rotateX(data.roll);
     box(w/2, w/2, w/2);

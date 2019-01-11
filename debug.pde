@@ -60,6 +60,6 @@ class HUD {
     for (int i=0; i<4; i++) {  
       toggles[i].render(data.toggles[i]);
     }
-    compass.render();
+    compass.render(elem_w, margin);
   }
 }
