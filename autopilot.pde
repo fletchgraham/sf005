@@ -15,7 +15,7 @@ class AutoPilot {
   }
 
   void choose_new_rotation() {
-    for (int i = 0; i < 3; i++) {
+    for (int i = 0; i < 2; i++) {
       acc_target[i] = random(-1, 1);
     }
   }
@@ -30,9 +30,22 @@ class AutoPilot {
       data.faders[fader_index] += direction * .01;
     }
   }
-  
+
   void advance_rotation() {
-    
+    for (int i = 0; i < 2; i++) {
+      float current = data.acc[i];
+      if (goal_reached(current, acc_target[i])) {
+        choose_new_rotation();
+      } else {
+        float direction = (acc_target[i] - current) / abs(acc_target[i] - current);
+        data.acc[i] += direction * .002;
+      }
+    }
+  }
+
+  void advance() {
+    advance_fader();
+    advance_rotation();
   }
 
   boolean goal_reached(float value, float target) {

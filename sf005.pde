@@ -59,7 +59,7 @@ public void draw() {
     stroke(255);
     noFill();
     ellipse(16, height-16, 20, 20);
-    auto.advance_fader();
+    auto.advance();
   } else {
     background(0);
   }
