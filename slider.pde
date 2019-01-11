@@ -39,9 +39,12 @@ class Slider extends Element {
   void clicked(Data data_model, int index) {
     if (over() != null) {
       if (orientation.equals("horizontal")) {
-        data_model.faders[index] = over().x;
+        data_model.faders[index] = (over().x);
       } else {
-        data_model.faders[index] = 1 - over().y; // inverted bc bottom is zero.
+        data_model.faders[index] = (1 - over().y); // inverted bc bottom is zero.
+      }
+      if (data_model.faders[index] < .008) {
+        data_model.faders[index] = 0;
       }
     }
   }

@@ -31,7 +31,7 @@ class HUD {
     
     // four toggles:
     for (int i=0; i<4; i++) {
-      toggles[i] = new Toggle(x + (elem_w + margin)*i, y + elem_w + margin * 2 + w, elem_w, 50);
+      toggles[i] = new Toggle(x + (elem_w + margin)*i, y + elem_w + margin * 2 + w, elem_w, elem_w*.8);
     }
   
     // accelerometer representation:

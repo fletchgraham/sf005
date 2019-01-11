@@ -13,18 +13,20 @@ HUD hud; // UI overlay thing
 float time;
 
 float scale = 1;
+float horiz = 0;
+float vert = 0;
   
 public void setup() {
-  fullScreen(P3D); // turn this off for debug probs.
+  //fullScreen(P3D); // turn this off for debug probs.
   time = 0;
   frameRate(24);
-  //size(1920,1080,P3D);
+  size(1920,1080,P3D);
   pixelDensity(displayDensity());
   data = new Data(); // where all the data is kept and updated.
   mans = loadShape("perturbed_man_sf.obj"); // load obj into mans.
   friend = new Friend(mans); // load mans into friend renderer.
   
-  hud = new HUD(16, 16, width/12); // position and width of the hud.
+  hud = new HUD(16, 16, width/8); // position and width of the hud.
   
   // osc stuff:
   oscP5 = new OscP5(this,8000);
@@ -47,7 +49,7 @@ public void draw() {
   
   pushMatrix(); // add default coords to stack.
   background(0); // black background.
-  translate(width/2, height/1.9, height/1.4 * scale); // bring mans to center stage.
+  translate(width/2 + horiz, height/1.9 + vert, height/1.4 * scale); // bring mans to center stage.
   rotateY(data.pitch); // around the up and down axis.
   rotateX(PI + data.roll);
   
@@ -68,9 +70,17 @@ void mousePressed() {
 }
 
 void keyPressed() {
-  if (keyCode ==UP) {
-    scale += .1;
-  } else if (keyCode == DOWN) {
-    scale -= .1;
+  if (key=='=') {
+    scale += .01;
+  } else if (key=='-') {
+    scale -= .01;
+  } else if (keyCode==UP) {
+    vert -= 1;
+  } else if (keyCode==DOWN) {
+    vert += 1;
+  } else if (keyCode==RIGHT) {
+    horiz += 1;
+  } else if (keyCode==LEFT) {
+    horiz -= 1;
   }
 }

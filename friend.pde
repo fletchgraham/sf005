@@ -67,7 +67,11 @@ class Friend {
     // floaty points:
     beginShape(POINTS);
     for (PVector point : points) {
-      strokeWeight(data.faders[1] * 10);
+      if (data.toggles[1] == 0.0) {
+        strokeWeight(data.faders[1] * 10);
+      } else {
+        strokeWeight((1-data.faders[1]) * 10);
+      }
       vertex(displace(point.x), displace(point.y), displace(point.z));
     }
     endShape();
@@ -83,8 +87,16 @@ class Friend {
     endShape(CLOSE);
   }
   
-  void render4(){}
-  
+  void render4(){
+    strokeWeight(2);
+    for (PVector point : collapsed) {
+      pushMatrix();
+      translate(displace(point.x), displace(point.y), displace(point.z));
+      rotateY(time*10);
+      box(10, 10, 10);
+      popMatrix();
+    }
+  }
 }
 
 
