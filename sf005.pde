@@ -49,7 +49,11 @@ public void draw() {
   rotateY(data.pitch); // around the up and down axis.
   rotateX(PI + data.roll); // stand him upright.
   
-  friend.render(); // draw mans as a friend.
+  // render in different styles:
+  friend.render1();
+  friend.render2();
+  friend.render3();
+  friend.render4();
   
   popMatrix(); // back to normal coordinates.
   hud.render(); // draw UI elements:

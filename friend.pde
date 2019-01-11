@@ -3,11 +3,16 @@
 class Friend {
   PShape my_shape;
   ArrayList<PVector> points; // list of vertices in the shape.
+  ArrayList<PVector> collapsed; // get rid of double verts.
 
   Friend(PShape my_shape_) {
-    my_shape = my_shape_;
-    points = new ArrayList();
-    update_points();
+    my_shape = my_shape_; // the base. what we're working with
+    points = new ArrayList(); // all the points from the shape. including overlapping.
+    update_points(); // load the points into the list.
+    remove_doubles();
+  }
+  
+  void remove_doubles() {
   }
 
   void update_points() {
@@ -22,15 +27,13 @@ class Friend {
       }
     }
   }
-
-  void render() {
-    update_points();
-
+  
+  void render1() {
     // wireframe:
     if (data.toggles[0] == 1.0) {
       noFill();
       stroke(255);
-      strokeWeight(2);
+      strokeWeight(data.faders[0]*2);
       beginShape(TRIANGLES);
       for (int i = 0; i < my_shape.getChildCount(); i++) {
         PShape face = my_shape.getChild(i);
@@ -41,13 +44,21 @@ class Friend {
       }
       endShape();
     }
+  }
+
+  void render2() {
+    update_points(); // REMOVE THIS SOMEHOW.
     
     // floaty points:
     beginShape(POINTS);
     for (PVector point : points) {
-      strokeWeight(data.faders[0] * 10);
+      strokeWeight(data.faders[1] * 10);
       vertex(point.x, point.y, point.z);
     }
     endShape();
   }
+  
+  void render3(){};
+  void render4(){};
+  
 }

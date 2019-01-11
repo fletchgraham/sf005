@@ -125,7 +125,7 @@ class Compass extends Element {
   void render() {
     stroke(255);
     strokeWeight(2);
-    noFill();
+    fill(0);
     ellipseMode(CORNERS);
     ellipse(x, y, x + w, y + h);
 
