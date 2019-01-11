@@ -1,6 +1,5 @@
 # Blender v2.80 (sub 37) OBJ File: 'perturbed_man_sf_001.blend'
 # www.blender.org
-mtllib perturbed_man_sf.mtl
 o perturbed-man-100
 v 3.171701 282.345062 69.871490
 v -29.422853 269.301025 33.865250
@@ -2415,7 +2414,6 @@ vn -0.4588 0.6662 -0.5880
 vn -0.5447 0.1289 -0.8287
 vn -0.1869 0.0551 -0.9808
 vn 0.3076 0.4292 -0.8492
-usemtl Default
 s off
 f 37/1/1 11/2/1 41/3/1
 f 30/4/2 270/5/2 275/6/2
