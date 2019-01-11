@@ -88,7 +88,7 @@ class Friend {
       for (PVector point : collapsed) {
         pushMatrix();
         translate(displace(point.x), displace(point.y), displace(point.z));
-        rotateY(time*10);
+        rotateY(time*5*(point.y/100));
         box(data.faders[1]*24, data.faders[1]*24, data.faders[1]*24);
         popMatrix();
       }

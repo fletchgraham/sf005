@@ -42,10 +42,22 @@ class AutoPilot {
       }
     }
   }
+  
+  void toggle_maybe() {
+    if (random(100) < 1) {
+      toggle_index = int(random(4));
+      if (data.toggles[toggle_index] == 0.0) {
+        data.toggles[toggle_index] = 1.0;
+      } else {
+        data.toggles[toggle_index] = 0.0;
+      }
+    }
+  }
 
   void advance() {
     advance_fader();
     advance_rotation();
+    toggle_maybe();
   }
 
   boolean goal_reached(float value, float target) {

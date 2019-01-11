@@ -16,6 +16,8 @@ float time;
 float scale = 1;
 float horiz = 0;
 float vert = 0;
+
+float gutter = 32;
   
 public void setup() {
   //fullScreen(P3D); // turn this off for debug probs.
@@ -27,7 +29,7 @@ public void setup() {
   mans = loadShape("perturbed_man_sf.obj"); // load obj into mans.
   friend = new Friend(mans); // load mans into friend renderer.
   
-  hud = new HUD(16, 16, width/8); // position and width of the hud.
+  hud = new HUD(gutter, gutter, width/8); // position and width of the hud.
   
   // osc stuff:
   oscP5 = new OscP5(this,8000);

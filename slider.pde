@@ -134,7 +134,7 @@ class Compass extends Element {
 
     ortho(-width/2, width/2, -height/2, height/2);
     pushMatrix();
-    translate(w/2+15, 2*elem_w+3*margin+1.5*w+14);
+    translate(w/2+gutter, 2*elem_w+3*margin+1.5*w+gutter);
     rotateY(data.pitch);
     rotateX(data.roll);
     box(w/2, w/2, w/2);
